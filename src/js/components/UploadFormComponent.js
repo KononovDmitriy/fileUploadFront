@@ -2,30 +2,20 @@ import React, { Component } from 'react';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
 
-class UploadFormComponent extends Component {
-  render() {
-        return (
-          <Form className="mt-3">
+const UploadFormComponent = ({ handler }) => {
 
-                <Form.Group controlId="form">
-                  <Form.Label>Выберите файл</Form.Label>
-                  <Form.Row>
-                  <Col>
-                    <Button variant="primary" type="submit">
-                      Загрузить
-                    </Button>
-                  </Col>
-                  <Col>
-                    <Form.Control type="file" placeholder="Выберите файл" />
-                  </Col>
-                  </Form.Row>
-
-                  </Form.Group>
-          </Form>
-        );
-    }
+  return (
+    <Form className="mt-3" onSubmit={ handler }>
+      <Form.Group controlId="form">
+        <Form.Label>Выберите файл</Form.Label>
+        <Form.Control type="file" placeholder="Выберите файл" />
+      </Form.Group>
+      <Button variant="primary" type="submit">
+        Загрузить
+      </Button>
+    </Form>
+  );
 }
 
 export default UploadFormComponent;
