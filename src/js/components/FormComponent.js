@@ -4,14 +4,31 @@ import { connect } from 'react-redux';
 import UploadFormComponent from './UploadFormComponent.js';
 import SpinnerComponent from './SpinnerComponent.js';
 
+import { INPUT_FILE } from './../constants.js';
+
 import { uploadFiles } from './../ac';
 
 class FormComponent extends Component {
+    constructor(props) {
+      super(props);
 
-  submitHandler(evt) {
+      this.state = {formValid: true};
+    }
+
+  submitHandler = (evt) => {
     evt.preventDefault();
-    console.dir(evt);
-    uploadFiles();
+
+    const file = evt.target.elements[INPUT_FILE].files;
+
+    if (!file.length) {
+      this.setState({ formValid: false });
+      return false;
+    }
+
+    this.setState({ formValid: true });
+    this.props.uploadFiles(file[0]);
+    return true;
+
   }
 
   render() {
@@ -19,7 +36,10 @@ class FormComponent extends Component {
 
     return (
       <div className="pl-5">
-        { (!stateUpload) ? <UploadFormComponent handler = { this.submitHandler } /> : <SpinnerComponent /> }
+        { (!stateUpload) ? <UploadFormComponent
+          handler = { this.submitHandler }
+          formValid = { this.state.formValid }
+      /> : <SpinnerComponent /> }
       </div>
     );
   }
@@ -27,6 +47,6 @@ class FormComponent extends Component {
 
 export default connect((state) => {
   return {
-    stateUpload: state.uploading
+    stateUpload: state.image.uploading
   };
 }, { uploadFiles })(FormComponent);

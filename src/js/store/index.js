@@ -1,8 +1,10 @@
 import {createStore, applyMiddleware} from 'redux';
 import reducer from '../reducer';
-// import api from '../middlewares/api';
+// import isuploadMidl from '../middleware/temp.js';
+import serverMidleware from '../middleware/server.js';
+import hideAlertMidleware from '../middleware/hideAlert.js';
 
-const enhancer = applyMiddleware();
+const enhancer = applyMiddleware(serverMidleware, hideAlertMidleware);
 
 const store = createStore(reducer, {}, enhancer);
 

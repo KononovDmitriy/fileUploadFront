@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Container from 'react-bootstrap/Container';
 import ImgPreviewComponent from './ImgPreviewComponent.js';
 import FormComponent from './FormComponent.js';
@@ -13,6 +14,5 @@ const App = () => {
         </Container>
     );
 }
-
 
 export default App;
