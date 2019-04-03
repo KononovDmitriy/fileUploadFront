@@ -2,11 +2,11 @@ import { SERVER_API, UPLOAD_FILES, RESPONSE_SUCCESS, RESPONSE_ERROR} from './../
 import { isUpload, uploadSuccess, uploadEror } from './../ac/';
 
 export default store => next => action => {
-  const { type, payload } = action;
-
   next(action);
 
-  if (!type === UPLOAD_FILES)
+  const { type, payload } = action;
+
+  if (type !== UPLOAD_FILES)
     return false;
 
   const formData = new FormData();

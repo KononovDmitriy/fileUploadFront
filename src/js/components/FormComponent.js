@@ -35,7 +35,7 @@ class FormComponent extends Component {
     const { stateUpload } = this.props;
 
     return (
-      <div className="pl-5">
+      <div className="w-25 mx-auto">
         { (!stateUpload) ? <UploadFormComponent
           handler = { this.submitHandler }
           formValid = { this.state.formValid }

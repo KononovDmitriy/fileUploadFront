@@ -7,7 +7,7 @@ import AlertComponent from './AlertComponent.js';
 
 const App = () => {
     return (
-        <Container className="px-auto">
+        <Container className="px-auto mt-4">
           <AlertComponent />
           <ImgPreviewComponent />
           <FormComponent />

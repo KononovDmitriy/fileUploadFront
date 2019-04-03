@@ -10,17 +10,6 @@ export function uploadFiles(file) {
   };
 };
 
-// export function isUpload(url, status, msg) {
-//   return {
-//     type: IS_UPLOAD,
-//     payload: {
-//       url,
-//       status,
-//       msg
-//     }
-//   };
-// };
-
 export function uploadSuccess(url) {
   return {
     type: UPLOAD_SUCCESS,
