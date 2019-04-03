@@ -6,12 +6,18 @@ import Figure from 'react-bootstrap/Figure';
 import { DEFAUL_IMG_URL } from './../constants.js';
 
 const FLEX_INLINE_STYLE = {
-  height: '250px',
-  width: '300px'
+  height: '500px',
+  width: '600px'
 };
 
 const FIGURE_INLINE_STYLE = {
-  width: '300px'
+  width: '600px'
+};
+
+const IMG_INLINE_STYLE = {
+  'object-fit': 'contain',
+  height: '500px',
+  width: '600px'
 };
 
 const ImgPreviewComponent = ({ imgUrl = DEFAUL_IMG_URL }) => {
@@ -20,7 +26,7 @@ const ImgPreviewComponent = ({ imgUrl = DEFAUL_IMG_URL }) => {
         <div
           className="d-flex flex-column justify-content-center"
           style={FLEX_INLINE_STYLE}>
-            <Figure.Image src={imgUrl} />
+            <Figure.Image src={imgUrl} style={ IMG_INLINE_STYLE } />
         </div>
         <Figure.Caption>
           Здесь отобразиться загруженная картинка
