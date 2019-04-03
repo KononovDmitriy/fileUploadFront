@@ -9,11 +9,11 @@ const Alerts = {
 }
 
 const AlertsMsgs = {
-  SUCCESS: 'Успех!',
-  ERROR: 'Ошибка!'
+  SUCCESS: 'Изображение успешно загружено!',
+  ERROR: 'Ошибка при загрузке изображения!'
 }
 
-const AlertComponent = ({ show, error, msg }) => {
+const AlertComponent = ({ show, error }) => {
   return (
       <Alert
         className="fixed-top"
@@ -22,17 +22,13 @@ const AlertComponent = ({ show, error, msg }) => {
         <Alert.Heading>
           { (!error) ? AlertsMsgs.SUCCESS : AlertsMsgs.ERROR }
         </Alert.Heading>
-        <p>
-          { msg }
-        </p>
       </Alert>
     );
 };
 
 export default connect((store) => {
   return {
-    show: store.alert.alertShow,
-    error: store.alert.alertError,
-    msg: store.alert.alertMsg
+    show: store.alert.show,
+    error: store.alert.error,
   };
 })(AlertComponent);

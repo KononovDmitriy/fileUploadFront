@@ -22,7 +22,6 @@ export function uploadFiles(file) {
 // };
 
 export function uploadSuccess(url) {
-  console.log('uploadSuccess');
   return {
     type: UPLOAD_SUCCESS,
     payload: {
@@ -32,7 +31,6 @@ export function uploadSuccess(url) {
 };
 
 export function uploadEror() {
-  console.log('AC uploadError');
   return {
     type: UPLOAD_ERROR,
   };

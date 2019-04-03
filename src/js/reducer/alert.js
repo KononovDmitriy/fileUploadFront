@@ -1,25 +1,23 @@
 import { Record } from 'immutable';
-import { IS_UPLOAD, HIDE_ALERT, RESPONSE_SUCCESS, RESPONSE_ERROR } from './../constants.js';
+import { UPLOAD_SUCCESS, UPLOAD_ERROR, HIDE_ALERT, RESPONSE_SUCCESS, RESPONSE_ERROR } from './../constants.js';
 
 const AlertRecord = Record({
-  alertError: false,
-  alertMsg: 'Сообщение',
-  alertShow: false
+  error: false,
+  show: false
 });
 
-const isUploadShow = (alertState, payload) => {
-  const { url, status, msg } = payload;
+const getSuccessState = (alertState) => {
+  let newState = alertState.set('error', false);
+  newState = newState.set('show', true);
 
-  let newState = alertState.set('alertMsg', msg);
-  newState = newState.set('alertShow', true);
+  return newState;
+};
 
-  switch(status) {
-    case RESPONSE_SUCCESS:
-      return newState.set('alertError', false);
+const getErrorState = (alertState) => {
+  let newState = alertState.set('error', true);
+  newState = newState.set('show', true);
 
-    case RESPONSE_ERROR:
-      return newState.set('alertShow', true);
-  }
+  return newState;
 };
 
 const defaultState = new AlertRecord();
@@ -28,12 +26,15 @@ export default (alertState = defaultState, action) => {
   const { type, payload } = action
 
   switch(type) {
-    case IS_UPLOAD:
-      let newState = isUploadShow(alertState, payload);
-      return newState;
+
+    case UPLOAD_SUCCESS:
+      return getSuccessState(alertState, payload);
+
+    case UPLOAD_ERROR:
+      return getErrorState(alertState);
 
     case HIDE_ALERT:
-      return alertState.set('alertShow', false);
+      return alertState.set('show', false);
   }
 
   return alertState;

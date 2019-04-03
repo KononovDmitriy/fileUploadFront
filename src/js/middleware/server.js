@@ -1,4 +1,4 @@
-import { SERVER_API, UPLOAD_FILES, SUCCESS, MSG_SUCCESS } from './../constants.js';
+import { SERVER_API, UPLOAD_FILES, RESPONSE_SUCCESS, RESPONSE_ERROR} from './../constants.js';
 import { isUpload, uploadSuccess, uploadEror } from './../ac/';
 
 export default store => next => action => {
@@ -21,12 +21,19 @@ export default store => next => action => {
   })
   .then((response) => {
     const { imgUrl, status } = response;
-    console.log('middleware uploadSuccess');
-    next(uploadSuccess(imgUrl));
+
+    switch(status) {
+
+      case RESPONSE_SUCCESS:
+        next(uploadSuccess(imgUrl));
+        break;
+
+      case RESPONSE_ERROR:
+         next(uploadEror());
+         break;
+    }
   })
   .catch((err) => {
-    console.log('CATCH server!');
-    console.log(err);
     next(uploadEror());
   })
 

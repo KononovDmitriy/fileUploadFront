@@ -6,7 +6,6 @@ import Figure from 'react-bootstrap/Figure';
 import { DEFAUL_IMG_URL } from './../constants.js';
 
 const ImgPreviewComponent = ({ imgUrl = DEFAUL_IMG_URL }) => {
-  console.log(imgUrl);
   return (
       <Figure>
         <Figure.Image
