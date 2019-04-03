@@ -1,7 +1,14 @@
 export const DEFAUL_IMG_URL = '/img/no-img.png';
 
 export const UPLOAD_FILES = 'UPLOAD_FILES';
-export const IS_UPLOAD = 'IS_UPLOAD';
+
+//удалить!
+// export const IS_UPLOAD = 'IS_UPLOAD';
+
+export const UPLOAD_SUCCESS = 'UPLOAD_SUCCESS';
+export const UPLOAD_ERROR = 'UPLOAD_ERROR';
+
+
 export const HIDE_ALERT = 'HIDE_ALERT';
 
 export const INPUT_FILE = 'inputFile';

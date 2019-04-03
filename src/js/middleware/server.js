@@ -1,5 +1,5 @@
 import { SERVER_API, UPLOAD_FILES, SUCCESS, MSG_SUCCESS } from './../constants.js';
-import { isUpload } from './../ac/';
+import { isUpload, uploadSuccess, uploadEror } from './../ac/';
 
 export default store => next => action => {
   const { type, payload } = action;
@@ -20,11 +20,14 @@ export default store => next => action => {
     return response.json();
   })
   .then((response) => {
-    const { message, status } = response;
-    next(isUpload(message, status, MSG_SUCCESS));
+    const { imgUrl, status } = response;
+    console.log('middleware uploadSuccess');
+    next(uploadSuccess(imgUrl));
   })
   .catch((err) => {
-
+    console.log('CATCH server!');
+    console.log(err);
+    next(uploadEror());
   })
 
 };
