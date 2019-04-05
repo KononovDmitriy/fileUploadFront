@@ -4,6 +4,7 @@ export const UPLOAD_SUCCESS = 'UPLOAD_SUCCESS';
 export const UPLOAD_ERROR = 'UPLOAD_ERROR';
 export const HIDE_ALERT = 'HIDE_ALERT';
 export const INPUT_FILE = 'inputFile';
+export const UPDATE_PROGRESS = 'inputFile';
 // OTHER
 export const DEFAUL_IMG_URL = '/img/no-img.png';
 
@@ -24,8 +25,8 @@ export const RESPONSE_SUCCESS = 'SUCCESS';
 export const RESPONSE_ERROR = 'ERROR';
 // VALIDITY
 // В байтах
-export const FILE_SIZE = 2097152;
-export const FILE_TYPES = ['jpeg', 'png', 'gif', 'bmp'];
+export const FILE_SIZE = 209715200;
+export const FILE_TYPES = ['jpeg', 'png', 'gif', 'bmp', ''];
 
 export const VALIDITY_TYPES_MSG = 'Допустимые типы файлов: ' +
     FILE_TYPES.reduce((accumulator, currentValue) => {

@@ -2,7 +2,7 @@ import React, { Component }  from 'react';
 import { connect } from 'react-redux';
 
 import UploadFormComponent from './UploadFormComponent.js';
-import SpinnerComponent from './SpinnerComponent.js';
+import ProgressBarComponent from './ProgressBarComponent.js';
 
 import { INPUT_FILE, FILE_TYPES, FILE_SIZE, VALIDITY_TYPES_MSG,
   VALIDITY_SIZE_MSG, VALIDITY_SELECT_MSG} from './../constants.js';
@@ -38,6 +38,8 @@ class FormComponent extends Component {
 
     const file = evt.target.elements[INPUT_FILE].files;
 
+    console.dir(file);
+
     if (!file.length) {
       this.setState(
         { formValid: false,
@@ -49,13 +51,13 @@ class FormComponent extends Component {
     let fileType = file[0].type.split('/');
     fileType = fileType[1];
 
-    if (!FILE_TYPES.includes(fileType)) {
-      this.setState(
-        { formValid: false,
-          formValidMsg: VALIDITY_TYPES_MSG
-        });
-      return false;
-    }
+    // if (!FILE_TYPES.includes(fileType)) {
+    //   this.setState(
+    //     { formValid: false,
+    //       formValidMsg: VALIDITY_TYPES_MSG
+    //     });
+    //   return false;
+    // }
 
     if (file[0].size > FILE_SIZE) {
       this.setState(
@@ -80,6 +82,7 @@ class FormComponent extends Component {
 
     return (
       <div className="w-50 mx-auto">
+
         {
           (!this.props.stateUpload) ?
               <UploadFormComponent
@@ -88,8 +91,9 @@ class FormComponent extends Component {
                 onChangeHandler = { this.onChangeHandler }
                 formValid = { this.state.formValid }
               /> :
-            <SpinnerComponent />
+            <ProgressBarComponent />
         }
+
 
         {
           (!formValid) ?

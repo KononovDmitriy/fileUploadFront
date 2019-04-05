@@ -7,4 +7,6 @@ const enhancer = applyMiddleware(serverMidleware, hideAlertMidleware);
 
 const store = createStore(reducer, {}, enhancer);
 
+window.store = store;
+
 export default store;
