@@ -20,11 +20,11 @@ export function updateProgress(total, loaded) {
   };
 };
 
-export function uploadSuccess(url) {
+export function uploadSuccess(filesList) {
   return {
     type: UPLOAD_SUCCESS,
     payload: {
-      url,
+      filesList
     }
   };
 };

@@ -38,18 +38,16 @@ class FormComponent extends Component {
 
     const file = evt.target.elements[INPUT_FILE].files;
 
-    console.dir(file);
+    // if (!file.length) {
+    //   this.setState(
+    //     { formValid: false,
+    //       formValidMsg: VALIDITY_SELECT_MSG
+    //     });
+    //   return false;
+    // }
 
-    if (!file.length) {
-      this.setState(
-        { formValid: false,
-          formValidMsg: VALIDITY_SELECT_MSG
-        });
-      return false;
-    }
-
-    let fileType = file[0].type.split('/');
-    fileType = fileType[1];
+    // let fileType = file[0].type.split('/');
+    // fileType = fileType[1];
 
     // if (!FILE_TYPES.includes(fileType)) {
     //   this.setState(
@@ -59,16 +57,16 @@ class FormComponent extends Component {
     //   return false;
     // }
 
-    if (file[0].size > FILE_SIZE) {
-      this.setState(
-        { formValid: false,
-          formValidMsg: VALIDITY_SIZE_MSG
-        });
-      return false;
-    }
+    // if (file[0].size > FILE_SIZE) {
+    //   this.setState(
+    //     { formValid: false,
+    //       formValidMsg: VALIDITY_SIZE_MSG
+    //     });
+    //   return false;
+    // }
 
     this.setState({ formValid: true });
-    this.props.uploadFiles(file[0]);
+    this.props.uploadFiles(file);
     return true;
   }
 
@@ -113,7 +111,7 @@ class FormComponent extends Component {
 
 export default connect((state) => {
   return {
-    stateUpload: state.image.uploading
+    stateUpload: state.files.uploading
   };
 }, { uploadFiles })(FormComponent);
 

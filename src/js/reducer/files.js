@@ -4,11 +4,11 @@ import { UPLOAD_FILES, IS_UPLOAD, HIDE_ALERT, RESPONSE_SUCCESS, RESPONSE_ERROR,
   DEFAUL_IMG_URL, SERVER_DOMEN, UPLOAD_SUCCESS, UPLOAD_ERROR } from './../constants.js';
 
 const getSuccessState = (imageState, payload) => {
-  const { url, status } = payload;
+  const { filesList, status } = payload;
 
   let newState = imageState.set('uploading', false);
   newState = newState.set('upload', true);
-  newState = newState.set('imgUrl', SERVER_DOMEN + url);
+  newState = newState.set('filesList', filesList);
 
   return newState;
 };
@@ -16,7 +16,7 @@ const getSuccessState = (imageState, payload) => {
 const getErrorState = (imageState) => {
   let newState = imageState.set('uploading', false);
   newState = newState.set('upload', false);
-  newState = newState.set('imgUrl', undefined);
+  newState = newState.set('filesList', undefined);
 
   return newState;
 };
@@ -24,7 +24,7 @@ const getErrorState = (imageState) => {
 const ImageRecord = Record({
   uploading: false,
   upload: false,
-  imgUrl: undefined,
+  filesList: undefined,
 });
 
 const defaultState = new ImageRecord();

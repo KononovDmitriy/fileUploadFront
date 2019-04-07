@@ -16,6 +16,7 @@ const UploadFormComponent = React.forwardRef((props, ref) => (
           type="file"
           placeholder="Выберите файл"
           ref={ref}
+          multiple
         />
       </Form.Group>
       <Button variant="primary" type="submit">

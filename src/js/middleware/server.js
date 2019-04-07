@@ -2,6 +2,19 @@ import axios from 'axios';
 import { SERVER_API, UPLOAD_FILES, RESPONSE_SUCCESS, RESPONSE_ERROR} from './../constants.js';
 import { isUpload, uploadSuccess, uploadEror, updateProgress } from './../ac/';
 
+const getData = (fileList) => {
+  const formData = new FormData();
+
+  let index = 0;
+
+  for (let el of fileList) {
+    formData.append(index, el);
+    index++;
+  }
+
+  return formData;
+};
+
 export default store => next => action => {
   next(action);
 
@@ -10,57 +23,32 @@ export default store => next => action => {
   if (type !== UPLOAD_FILES)
     return false;
 
-  const formData = new FormData();
-      formData.append('img', payload.file);
-
-  // fetch(SERVER_API, {
-  //   method: 'POST',
-  //   body: formData
-  // })
-  // .then((response) => {
-  //   return response.json();
-  // })
-  // .then((response) => {
-  //   const { imgUrl, status } = response;
-
-  //   switch(status) {
-
-  //     case RESPONSE_SUCCESS:
-  //       next(uploadSuccess(imgUrl));
-  //       break;
-
-  //     case RESPONSE_ERROR:
-  //        next(uploadEror());
-  //        break;
-  //   }
-  // })
-  // .catch((err) => {
-  //   next(uploadEror());
-  // })
-
-  axios.post(SERVER_API, formData, {
+  axios.post(SERVER_API, getData(payload.file), {
     onUploadProgress: (evt) => {
-      // console.dir(evt);
+      console.dir(evt);
       const { total, loaded } = evt;
+      console.log(`total = ${total}, loaded = ${loaded}`);
       next(updateProgress(total, loaded));
     }
   })
   .then((response) => {
 
-      const { imgUrl, status } = response.data;
+      const { filesList, status } = response.data;
 
       switch(status) {
         case RESPONSE_SUCCESS:
-          next(uploadSuccess(imgUrl));
+          next(uploadSuccess(filesList));
           break;
         case RESPONSE_ERROR:
-           next(uploadEror());
-           break;
+          console.log(error);
+          next(uploadEror());
+          break;
       }
 
   })
   .catch((error) => {
     console.log(error);
+    next(uploadEror());
   });
 
 };

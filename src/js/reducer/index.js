@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
-import image from './image';
+import files from './files';
 import alert from './alert';
 import progressBar from './progressBar';
 
-export default combineReducers({ image, alert, progressBar });
+export default combineReducers({ files, alert, progressBar });

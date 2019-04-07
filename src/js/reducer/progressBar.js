@@ -17,7 +17,12 @@ export default (progressState = defaultState, action) => {
   switch(type) {
     case UPDATE_PROGRESS:
       const { total, loaded } = payload;
-      return progressState.set('percent', getPercent(total, loaded));
+
+
+      console.log(`total = ${total}, loaded = ${loaded}`);
+      let ff = getPercent(total, loaded);
+      console.log(ff);
+      return progressState.set('percent', ff);
 
     case UPLOAD_SUCCESS:
       return progressState.set('percent', 0);
