@@ -25,9 +25,7 @@ export default store => next => action => {
 
   axios.post(SERVER_API, getData(payload.file), {
     onUploadProgress: (evt) => {
-      console.dir(evt);
       const { total, loaded } = evt;
-      console.log(`total = ${total}, loaded = ${loaded}`);
       next(updateProgress(total, loaded));
     }
   })
@@ -40,14 +38,12 @@ export default store => next => action => {
           next(uploadSuccess(filesList));
           break;
         case RESPONSE_ERROR:
-          console.log(error);
           next(uploadEror());
           break;
       }
 
   })
   .catch((error) => {
-    console.log(error);
     next(uploadEror());
   });
 

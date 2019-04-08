@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import ImgPreviewComponent from './ImgPreviewComponent.js'
 
 const FileListComponent = ({ filesList = [] }) => {
-  console.dir(filesList);
 
   if (filesList.length === 0) return '';
 

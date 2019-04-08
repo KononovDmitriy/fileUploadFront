@@ -8,14 +8,11 @@ import { INPUT_FILE, FILE_TYPES, FILE_SIZE, VALIDITY_TYPES_MSG,
   VALIDITY_SIZE_MSG, VALIDITY_SELECT_MSG} from './../constants.js';
 
 import { uploadFiles } from './../ac';
+import { validationFiles } from './../tools.js';
 
 import Button from 'react-bootstrap/Button';
 import Overlay from 'react-bootstrap/Overlay'
 import Tooltip from 'react-bootstrap/Tooltip'
-
-const validityFile = (file) => {
-
-};
 
 class FormComponent extends Component {
     constructor(props) {
@@ -36,37 +33,23 @@ class FormComponent extends Component {
   onSubmitHandler = (evt) => {
     evt.preventDefault();
 
-    const file = evt.target.elements[INPUT_FILE].files;
+    const files = evt.target.elements[INPUT_FILE].files;
 
-    // if (!file.length) {
-    //   this.setState(
-    //     { formValid: false,
-    //       formValidMsg: VALIDITY_SELECT_MSG
-    //     });
-    //   return false;
-    // }
+    let validity = validationFiles(files);
 
-    // let fileType = file[0].type.split('/');
-    // fileType = fileType[1];
+    if (!validity.status) {
+      this.setState(
+        {
+          formValid: false,
+          formValidMsg: validity.msg
+        }
+      );
 
-    // if (!FILE_TYPES.includes(fileType)) {
-    //   this.setState(
-    //     { formValid: false,
-    //       formValidMsg: VALIDITY_TYPES_MSG
-    //     });
-    //   return false;
-    // }
-
-    // if (file[0].size > FILE_SIZE) {
-    //   this.setState(
-    //     { formValid: false,
-    //       formValidMsg: VALIDITY_SIZE_MSG
-    //     });
-    //   return false;
-    // }
+      return false;
+    }
 
     this.setState({ formValid: true });
-    this.props.uploadFiles(file);
+    this.props.uploadFiles(files);
     return true;
   }
 
