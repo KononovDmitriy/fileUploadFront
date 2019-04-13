@@ -1,11 +1,17 @@
 import {createStore, applyMiddleware} from 'redux';
 import reducer from '../reducer';
-import serverMidleware from '../middleware/server.js';
-import hideAlertMidleware from '../middleware/hideAlert.js';
 
-const enhancer = applyMiddleware(serverMidleware, hideAlertMidleware);
+import sagaRoot from '../middleware/';
+
+import createSagaMiddleware from 'redux-saga';
+
+const sagaMiddleware = createSagaMiddleware();
+
+const enhancer = applyMiddleware(sagaMiddleware);
 
 const store = createStore(reducer, {}, enhancer);
+
+sagaMiddleware.run(sagaRoot);
 
 window.store = store;
 
