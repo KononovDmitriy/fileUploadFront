@@ -4,12 +4,14 @@ import { UPLOAD_SUCCESS, UPLOAD_ERROR } from './../constants.js';
 import { hideAlert } from './../ac/';
 
 const alertSaga = function* (action) {
-  // setTimeout(() => {
-  //   (hideAlert());
-  // }, 3000);
+  yield new Promise((resolve) => {
+    setTimeout(() => resolve(), 5000);
+  });
+
+  yield put(hideAlert());
 };
 
-export default watchAlertSaga = function* () {
+export default function* watchAlertSaga () {
   yield takeEvery(UPLOAD_SUCCESS, alertSaga);
   yield takeEvery(UPLOAD_ERROR, alertSaga);
 };

@@ -11,7 +11,7 @@ const enhancer = applyMiddleware(sagaMiddleware);
 
 const store = createStore(reducer, {}, enhancer);
 
-sagaMiddleware.run(sagaRoot);
+sagaMiddleware.run(sagaRoot, [store.dispatch]);
 
 window.store = store;
 
